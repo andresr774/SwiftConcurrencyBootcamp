@@ -9,7 +9,6 @@ import SwiftUI
 
 extension TaskGroupBootcamp {
     class DataManager {
-        
         func fetchImagesWithAsyncLet() async throws -> [UIImage] {
             async let fetchImage1 = fetchImage(urlString: "https://picsum.photos/300")
             async let fetchImage2 = fetchImage(urlString: "https://picsum.photos/300")
@@ -34,21 +33,21 @@ extension TaskGroupBootcamp {
                 // In here we are telling the compiler the number of elements that the array is going to have, it's a performance boost.
                 images.reserveCapacity(urlStrings.count)
                 
-                // When we create this child tasks, they are going to inherit the priority of their parent, in this case .task() from view is the parent, that's why we don't need to provide a priority if we don't want to, but if we want to we can use addTask(priority: )
+                // When we create this child tasks, they are going to inherit the priority of their parent, in this case .task() from TaskGroupBootcamp View, that's why we don't need to provide a priority if we don't want to, but if we want to we can use addTask(priority: )
                 for urlString in urlStrings {
                     group.addTask {
                         // We use try? here so that all tasks doesn't stop just if one of them fails.
                         try? await self.fetchImage(urlString: urlString)
                     }
                 }
-                
                 for try await image in group {
                     // This results doesn't come in order, every time a result comes through it's going to do it inside this loop
-                    // This loop doesn't behave like a normal loop, this loop it's going to wait for each of the tasks to come back
+                    // This loop doesn't behave like a normal loop, this loop it's going to wait for each task to come back
                     if let image = image {
                         images.append(image)
                     }
                 }
+                // After we got all the images, then return them.
                 return images
             }
         }

@@ -29,21 +29,21 @@ struct AsyncLetBootcamp: View {
                 Task {
                     do {
                         async let fetchImage1 = fetchImage()
-                        async let fetchTitle = fetchTitle()
+//                        async let fetchTitle = fetchTitle()
+//
+//                        let (image, title) = await (try fetchImage1, fetchTitle)
                         
-                        let (image, title) = await (try fetchImage1, fetchTitle)
-                        
-//                        async let fetchImage2 = fetchImage()
-//                        async let fetchImage3 = fetchImage()
-//                        async let fetchImage4 = fetchImage()
+                        async let fetchImage2 = fetchImage()
+                        async let fetchImage3 = fetchImage()
+                        async let fetchImage4 = fetchImage()
                         
                         // Here we are waiting to complete all 4 tasks and we are going to get the result just when all of the tasks are completed.
                         
                         // If we want to try to fetch an image and if it fails then continue with the next one we can use try?
                         
-                        //let (image1, image2, image3, image4) = await (try? fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4)
+                        let (image1, image2, image3, image4) = await (try? fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4)
                     
-                        //images.append(contentsOf: [image1 ?? UIImage(), image2, image3, image4])
+                        images.append(contentsOf: [image1 ?? UIImage(), image2, image3, image4])
 //                        let image1 = try await fetchImage()
 //                        images.append(image1)
 //
@@ -57,7 +57,7 @@ struct AsyncLetBootcamp: View {
 //                        images.append(image4)
                         
                     } catch {
-                        
+                        print(error.localizedDescription)
                     }
                 }
             }
