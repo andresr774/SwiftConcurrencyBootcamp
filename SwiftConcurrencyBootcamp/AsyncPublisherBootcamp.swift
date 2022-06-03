@@ -37,7 +37,7 @@ extension AsyncPublisherBootcamp {
             Task {
                 for await value in await manager.$myData.values {
                     await MainActor.run {
-                        //self.dataArray = value
+                        self.dataArray = value
                     }
                 }
             }
